@@ -1,0 +1,19 @@
+{
+  "Comment": "This acts as a welcome bot that periodically retoots introductions",
+  "StartsAt": "RetootIntros",
+  "Steps": {
+    "RetootIntros": {
+      "Type": "Task",
+      "Resource": "arn:partition:lambda:region:account:function:aws_lambda_handler",
+      "Next": "Wait",
+      "ResultPath": "$.result",
+      "OutputPath": "$.output",
+      "Comment": "This retoots all toots with a given tag that happened since the last time we ran this"
+    },
+    "Wait 10 Minutes": {
+      "Type": "Wait",
+      "Seconds": 600,
+      "Next": "RetootIntros"
+    }
+  }
+}
